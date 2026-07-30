@@ -16,9 +16,9 @@ void configureDependencies() {
       defaultValue: 'http://localhost:8000');
   getIt.registerLazySingleton<Dio>(() => Dio(BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: const Duration(seconds: 30),
-      sendTimeout: const Duration(seconds: 30),
-      receiveTimeout: const Duration(seconds: 180))));
+      connectTimeout: const Duration(seconds: 60),
+      sendTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(minutes: 5))));
   getIt.registerLazySingleton<NewsRemoteDatasource>(
       () => NewsRemoteDatasource(getIt<Dio>()));
   getIt.registerLazySingleton<NewsRepository>(

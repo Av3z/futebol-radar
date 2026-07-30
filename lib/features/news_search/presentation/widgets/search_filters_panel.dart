@@ -53,7 +53,8 @@ class SearchFiltersPanel extends StatelessWidget {
                     'Google',
                     'Yahoo',
                     'Bolavip',
-                    'Antenados no Futebol'
+                    'Antenados no Futebol',
+                    'Somos Fanáticos'
                   ],
                   onChanged: onChanged),
               const SizedBox(height: 12),
