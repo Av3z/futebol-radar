@@ -75,11 +75,15 @@ class SearchFiltersPanel extends StatelessWidget {
                           labelText: 'Período', border: OutlineInputBorder()),
                       items: const [
                         DropdownMenuItem(
+                            value: 2, child: Text('Últimas 2 horas')),
+                        DropdownMenuItem(
                             value: 4, child: Text('Últimas 4 horas')),
                         DropdownMenuItem(
                             value: 8, child: Text('Últimas 8 horas')),
                         DropdownMenuItem(
                             value: 24, child: Text('Últimas 24 horas')),
+                        DropdownMenuItem(
+                            value: 48, child: Text('Últimos 2 dias')),
                         DropdownMenuItem(
                             value: 72, child: Text('Últimos 3 dias')),
                         DropdownMenuItem(
