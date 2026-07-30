@@ -13,19 +13,28 @@ class AppHeader extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.sports_soccer, size: 44, color: Theme.of(context).colorScheme.primary),
+                Icon(Icons.sports_soccer,
+                    size: 44, color: Theme.of(context).colorScheme.primary),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Futebol Radar', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800)),
+                      Text('Futebol Radar',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
-                      Text('Encontre as notícias mais relevantes por time, fonte e assunto.', style: Theme.of(context).textTheme.bodyLarge),
+                      Text(
+                          'Encontre as notícias mais relevantes por time, fonte e assunto.',
+                          style: Theme.of(context).textTheme.bodyLarge),
                     ],
                   ),
                 ),
-                const Chip(avatar: Icon(Icons.circle, size: 10, color: Colors.green), label: Text('API online')),
+                const Chip(
+                    avatar: Icon(Icons.circle, size: 10, color: Colors.green),
+                    label: Text('API online')),
               ],
             ),
           ),

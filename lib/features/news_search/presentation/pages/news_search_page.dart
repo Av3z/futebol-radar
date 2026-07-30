@@ -38,14 +38,17 @@ class _NewsSearchPageState extends State<NewsSearchPage> {
 
   void _search(BuildContext blocContext) {
     if (controller.teams.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Informe pelo menos um time.')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Informe pelo menos um time.')));
       return;
     }
     blocContext.read<NewsSearchBloc>().add(
           NewsSearchRequested(
             SearchFilters(
               teams: List.of(controller.teams),
-              sources: controller.sources.isEmpty ? const ['Google'] : List.of(controller.sources),
+              sources: controller.sources.isEmpty
+                  ? const ['Google']
+                  : List.of(controller.sources),
               keywords: List.of(controller.keywords),
               maxResultsPerTeam: maxResults,
               periodHours: periodHours,
@@ -74,13 +77,18 @@ class _NewsSearchPageState extends State<NewsSearchPage> {
                                 controller: controller,
                                 periodHours: periodHours,
                                 maxResults: maxResults,
-                                onPeriodChanged: (value) => setState(() => periodHours = value),
-                                onMaxResultsChanged: (value) => setState(() => maxResults = value),
+                                onPeriodChanged: (value) =>
+                                    setState(() => periodHours = value),
+                                onMaxResultsChanged: (value) =>
+                                    setState(() => maxResults = value),
                                 onChanged: () => setState(() {}),
                                 onClear: () => _clearSearch(context),
                                 onSearch: () => _search(context)),
                             const SizedBox(height: 28),
-                            NewsResultsView(onPostStatusChanged: (url) => context.read<NewsSearchBloc>().add(NewsPostStatusChanged(url))),
+                            NewsResultsView(
+                                onPostStatusChanged: (url) => context
+                                    .read<NewsSearchBloc>()
+                                    .add(NewsPostStatusChanged(url))),
                           ],
                         ),
                       ),

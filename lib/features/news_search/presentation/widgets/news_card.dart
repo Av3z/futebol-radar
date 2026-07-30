@@ -6,13 +6,19 @@ import '../../domain/entities/news_article.dart';
 import 'publication_date.dart';
 
 class NewsCard extends StatelessWidget {
-  const NewsCard({super.key, required this.article, required this.onPostStatusChanged});
+  const NewsCard(
+      {super.key, required this.article, required this.onPostStatusChanged});
   final NewsArticle article;
   final ValueChanged<String> onPostStatusChanged;
 
   @override
   Widget build(BuildContext context) => Card(
-        color: article.isPosted ? Theme.of(context).colorScheme.secondaryContainer.withValues(alpha: 0.72) : null,
+        color: article.isPosted
+            ? Theme.of(context)
+                .colorScheme
+                .secondaryContainer
+                .withValues(alpha: 0.72)
+            : null,
         clipBehavior: Clip.antiAlias,
         child: Stack(
           children: [
@@ -28,19 +34,29 @@ class NewsCard extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .labelMedium
-                                  ?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold))),
+                                  ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontWeight: FontWeight.bold))),
                       Chip(label: Text('${article.relevanceScore} pts')),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text(article.title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+                  Text(article.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: 8),
-                  Text(article.summary, maxLines: 4, overflow: TextOverflow.ellipsis),
+                  Text(article.summary,
+                      maxLines: 4, overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 12),
-                  Wrap(
-                      spacing: 6,
-                      runSpacing: 4,
-                      children: [for (final keyword in article.matchedKeywords) Chip(visualDensity: VisualDensity.compact, label: Text(keyword))]),
+                  Wrap(spacing: 6, runSpacing: 4, children: [
+                    for (final keyword in article.matchedKeywords)
+                      Chip(
+                          visualDensity: VisualDensity.compact,
+                          label: Text(keyword))
+                  ]),
                   const SizedBox(height: 12),
                   PublicationDate(article: article),
                   const SizedBox(height: 6),
@@ -48,23 +64,31 @@ class NewsCard extends StatelessWidget {
                     children: [
                       TextButton.icon(
                           onPressed: () => onPostStatusChanged(article.url),
-                          icon: Icon(article.isPosted ? Icons.undo : Icons.check_circle_outline),
-                          label: Text(article.isPosted ? 'Desmarcar postado' : 'Marcar como postado')),
+                          icon: Icon(article.isPosted
+                              ? Icons.undo
+                              : Icons.check_circle_outline),
+                          label: Text(article.isPosted
+                              ? 'Desmarcar postado'
+                              : 'Marcar como postado')),
                       const Spacer(),
                       IconButton(
                           onPressed: () {
                             Clipboard.setData(ClipboardData(text: article.url));
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('URL copiada.')));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('URL copiada.')));
                           },
                           icon: const Icon(Icons.copy_outlined),
                           tooltip: 'Copiar URL'),
                       IconButton(
-                          onPressed: () => launchUrl(Uri.parse(article.url), webOnlyWindowName: '_blank'),
+                          onPressed: () => launchUrl(Uri.parse(article.url),
+                              webOnlyWindowName: '_blank'),
                           icon: const Icon(Icons.open_in_new),
                           tooltip: 'Abrir matéria'),
                     ],
                   ),
-                  SelectableText(article.url, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary)),
+                  SelectableText(article.url,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.primary)),
                 ],
               ),
             ),
@@ -75,7 +99,10 @@ class NewsCard extends StatelessWidget {
                 child: Tooltip(
                     message: 'Marcada como postada',
                     child: CircleAvatar(
-                        radius: 13, backgroundColor: Colors.green.shade600, child: const Icon(Icons.check, size: 17, color: Colors.white))),
+                        radius: 13,
+                        backgroundColor: Colors.green.shade600,
+                        child: const Icon(Icons.check,
+                            size: 17, color: Colors.white))),
               ),
           ],
         ),

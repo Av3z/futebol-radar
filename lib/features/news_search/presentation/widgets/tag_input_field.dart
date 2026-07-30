@@ -55,7 +55,8 @@ class TagInputField extends StatelessWidget {
                 spacing: 6,
                 children: [
                   for (final suggestion in suggestions)
-                    if (!values.any((value) => value.toLowerCase() == suggestion.toLowerCase()))
+                    if (!values.any((value) =>
+                        value.toLowerCase() == suggestion.toLowerCase()))
                       ActionChip(
                         label: Text(suggestion),
                         onPressed: () {

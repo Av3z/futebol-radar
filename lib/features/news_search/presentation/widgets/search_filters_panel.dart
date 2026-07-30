@@ -30,7 +30,8 @@ class SearchFiltersPanel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Configurar pesquisa', style: Theme.of(context).textTheme.titleLarge),
+              Text('Configurar pesquisa',
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 16),
               TagInputField(
                   controller: controller,
@@ -48,7 +49,12 @@ class SearchFiltersPanel extends StatelessWidget {
                   label: 'Fontes (opcional)',
                   hint: 'Google por padrão',
                   icon: Icons.public,
-                  suggestions: const ['Google', 'Yahoo', 'Bolavip', 'Antenados no Futebol'],
+                  suggestions: const [
+                    'Google',
+                    'Yahoo',
+                    'Bolavip',
+                    'Antenados no Futebol'
+                  ],
                   onChanged: onChanged),
               const SizedBox(height: 12),
               TagInputField(
@@ -65,13 +71,19 @@ class SearchFiltersPanel extends StatelessWidget {
                   Expanded(
                     child: DropdownButtonFormField<int>(
                       initialValue: periodHours,
-                      decoration: const InputDecoration(labelText: 'Período', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                          labelText: 'Período', border: OutlineInputBorder()),
                       items: const [
-                        DropdownMenuItem(value: 4, child: Text('Últimas 4 horas')),
-                        DropdownMenuItem(value: 8, child: Text('Últimas 8 horas')),
-                        DropdownMenuItem(value: 24, child: Text('Últimas 24 horas')),
-                        DropdownMenuItem(value: 72, child: Text('Últimos 3 dias')),
-                        DropdownMenuItem(value: 168, child: Text('Últimos 7 dias')),
+                        DropdownMenuItem(
+                            value: 4, child: Text('Últimas 4 horas')),
+                        DropdownMenuItem(
+                            value: 8, child: Text('Últimas 8 horas')),
+                        DropdownMenuItem(
+                            value: 24, child: Text('Últimas 24 horas')),
+                        DropdownMenuItem(
+                            value: 72, child: Text('Últimos 3 dias')),
+                        DropdownMenuItem(
+                            value: 168, child: Text('Últimos 7 dias')),
                       ],
                       onChanged: (value) {
                         if (value != null) onPeriodChanged(value);
@@ -83,9 +95,12 @@ class SearchFiltersPanel extends StatelessWidget {
                     width: 130,
                     child: DropdownButtonFormField<int>(
                       initialValue: maxResults,
-                      decoration: const InputDecoration(labelText: 'Máx.', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                          labelText: 'Máx.', border: OutlineInputBorder()),
                       items: [
-                        for (final value in [5, 10, 20, 50]) DropdownMenuItem(value: value, child: Text('$value notícias'))
+                        for (final value in [5, 10, 20, 50])
+                          DropdownMenuItem(
+                              value: value, child: Text('$value notícias'))
                       ],
                       onChanged: (value) {
                         if (value != null) onMaxResultsChanged(value);
@@ -97,9 +112,14 @@ class SearchFiltersPanel extends StatelessWidget {
               const SizedBox(height: 18),
               Row(
                 children: [
-                  Expanded(child: FilledButton.icon(onPressed: onSearch, icon: const Icon(Icons.search), label: const Text('Buscar notícias'))),
+                  Expanded(
+                      child: FilledButton.icon(
+                          onPressed: onSearch,
+                          icon: const Icon(Icons.search),
+                          label: const Text('Buscar notícias'))),
                   const SizedBox(width: 10),
-                  OutlinedButton(onPressed: onClear, child: const Text('Limpar')),
+                  OutlinedButton(
+                      onPressed: onClear, child: const Text('Limpar')),
                 ],
               ),
             ],
