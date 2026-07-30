@@ -7,6 +7,11 @@ import '../features/news_search/domain/repositories/news_repository.dart';
 import '../features/news_search/domain/usecases/get_sources_usecase.dart';
 import '../features/news_search/domain/usecases/search_news_usecase.dart';
 import '../features/news_search/presentation/bloc/news_search_bloc.dart';
+import '../features/engagements/data/datasources/engagement_remote_datasource.dart';
+import '../features/engagements/data/repositories/engagement_repository_impl.dart';
+import '../features/engagements/domain/repositories/engagement_repository.dart';
+import '../features/engagements/domain/usecases/search_engagement_usecase.dart';
+import '../features/engagements/presentation/bloc/engagement_bloc.dart';
 import '../core/storage/posted_news_store.dart';
 
 final getIt = GetIt.instance;
@@ -28,4 +33,11 @@ void configureDependencies() {
   getIt.registerLazySingleton(PostedNewsStore.new);
   getIt.registerFactory(() => NewsSearchBloc(getIt<SearchNewsUsecase>(),
       getIt<GetSourcesUsecase>(), getIt<PostedNewsStore>()));
+  getIt.registerLazySingleton<EngagementRemoteDatasource>(
+      () => EngagementRemoteDatasource(getIt<Dio>()));
+  getIt.registerLazySingleton<EngagementRepository>(
+      () => EngagementRepositoryImpl(getIt<EngagementRemoteDatasource>()));
+  getIt.registerLazySingleton(
+      () => SearchEngagementUsecase(getIt<EngagementRepository>()));
+  getIt.registerFactory(() => EngagementBloc(getIt<SearchEngagementUsecase>()));
 }
