@@ -62,7 +62,7 @@ class SearchFiltersPanel extends StatelessWidget {
                   field: controller.keyword,
                   values: controller.keywords,
                   label: 'Palavras-chave',
-                  hint: 'Ex.: mercado da bola',
+                  hint: 'Futebol é padrão. Ex.: mercado da bola',
                   icon: Icons.sell_outlined,
                   onChanged: onChanged),
               const SizedBox(height: 12),
