@@ -16,10 +16,14 @@ class EngagementsTab extends StatefulWidget {
   State<EngagementsTab> createState() => _EngagementsTabState();
 }
 
-class _EngagementsTabState extends State<EngagementsTab> {
+class _EngagementsTabState extends State<EngagementsTab>
+    with AutomaticKeepAliveClientMixin<EngagementsTab> {
   final controller = NewsSearchController();
   int periodHours = 24;
   int maxResults = 10;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void dispose() {
@@ -29,6 +33,7 @@ class _EngagementsTabState extends State<EngagementsTab> {
 
   void _clearSearch(BuildContext blocContext) {
     controller.teams.clear();
+    controller.profiles.clear();
     controller.sources.clear();
     setState(() {});
     blocContext.read<EngagementBloc>().add(const EngagementSearchCleared());
@@ -43,6 +48,7 @@ class _EngagementsTabState extends State<EngagementsTab> {
     blocContext.read<EngagementBloc>().add(EngagementSearchRequested(
           EngagementFilters(
             teams: List.of(controller.teams),
+            profiles: List.of(controller.profiles),
             sources: controller.sources.isEmpty
                 ? const ['Instagram', 'Facebook', 'X', 'Threads']
                 : List.of(controller.sources),
@@ -53,41 +59,44 @@ class _EngagementsTabState extends State<EngagementsTab> {
   }
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (_) => getIt<EngagementBloc>(),
-        child: Builder(
-          builder: (context) => CustomScrollView(
-            slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
-                sliver: SliverToBoxAdapter(
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1180),
-                      child: Column(
-                        children: [
-                          EngagementFiltersPanel(
-                            controller: controller,
-                            periodHours: periodHours,
-                            maxResults: maxResults,
-                            onPeriodChanged: (value) =>
-                                setState(() => periodHours = value),
-                            onMaxResultsChanged: (value) =>
-                                setState(() => maxResults = value),
-                            onChanged: () => setState(() {}),
-                            onClear: () => _clearSearch(context),
-                            onSearch: () => _search(context),
-                          ),
-                          const SizedBox(height: 28),
-                          const EngagementResultsView(),
-                        ],
-                      ),
+  Widget build(BuildContext context) {
+    super.build(context);
+    return BlocProvider(
+      create: (_) => getIt<EngagementBloc>(),
+      child: Builder(
+        builder: (context) => CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+              sliver: SliverToBoxAdapter(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1180),
+                    child: Column(
+                      children: [
+                        EngagementFiltersPanel(
+                          controller: controller,
+                          periodHours: periodHours,
+                          maxResults: maxResults,
+                          onPeriodChanged: (value) =>
+                              setState(() => periodHours = value),
+                          onMaxResultsChanged: (value) =>
+                              setState(() => maxResults = value),
+                          onChanged: () => setState(() {}),
+                          onClear: () => _clearSearch(context),
+                          onSearch: () => _search(context),
+                        ),
+                        const SizedBox(height: 28),
+                        const EngagementResultsView(),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

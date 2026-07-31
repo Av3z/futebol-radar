@@ -47,6 +47,16 @@ class EngagementFiltersPanel extends StatelessWidget {
               const SizedBox(height: 12),
               TagInputField(
                 controller: controller,
+                field: controller.profile,
+                values: controller.profiles,
+                label: 'UsuÃ¡rios / perfis (opcional)',
+                hint: '@santosfc ou nome do perfil',
+                icon: Icons.person_search_outlined,
+                onChanged: onChanged,
+              ),
+              const SizedBox(height: 12),
+              TagInputField(
+                controller: controller,
                 field: controller.source,
                 values: controller.sources,
                 label: 'Redes sociais (opcional)',

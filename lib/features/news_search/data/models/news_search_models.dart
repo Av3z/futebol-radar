@@ -1,6 +1,7 @@
 import '../../domain/entities/news_article.dart';
 import '../../domain/entities/search_filters.dart';
 import '../../domain/entities/team_news.dart';
+import '../../../../core/media/media_url.dart';
 
 class NewsSearchRequestModel {
   const NewsSearchRequestModel(this.filters);
@@ -31,7 +32,7 @@ class NewsSearchResponseModel {
             team: data['team'] as String,
             source: data['source'] as String,
             url: data['url'] as String,
-            imageUrl: data['image_url'] as String?,
+            imageUrl: proxiedImageUrl(data['image_url'] as String?),
             publishedAt: data['published_at'] == null
                 ? null
                 : DateTime.tryParse(data['published_at'] as String),

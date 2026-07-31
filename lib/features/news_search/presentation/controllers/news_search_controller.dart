@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 
 class NewsSearchController {
   final team = TextEditingController();
+  final profile = TextEditingController();
   final source = TextEditingController();
   final keyword = TextEditingController();
   final teams = <String>[];
+  final profiles = <String>[];
   final sources = <String>[];
   final keywords = <String>[];
 
   void dispose() {
     team.dispose();
+    profile.dispose();
     source.dispose();
     keyword.dispose();
   }

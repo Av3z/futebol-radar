@@ -1,6 +1,7 @@
 import '../../domain/entities/social_post.dart';
 import '../../domain/entities/engagement_filters.dart';
 import '../../domain/entities/team_engagement.dart';
+import '../../../../core/media/media_url.dart';
 
 class EngagementSearchRequestModel {
   const EngagementSearchRequestModel(this.filters);
@@ -9,6 +10,7 @@ class EngagementSearchRequestModel {
 
   Map<String, dynamic> toJson() => {
         'teams': filters.teams,
+        'profiles': filters.profiles,
         'sources': filters.sources,
         'max_results_per_team': filters.maxResultsPerTeam,
         'period_hours': filters.periodHours,
@@ -56,7 +58,7 @@ class SocialPostModel {
         author: data['author'] as String,
         text: data['text'] as String,
         url: data['url'] as String,
-        imageUrl: data['image_url'] as String?,
+        imageUrl: proxiedImageUrl(data['image_url'] as String?),
         publishedAt: data['published_at'] == null
             ? null
             : DateTime.parse(data['published_at'] as String),

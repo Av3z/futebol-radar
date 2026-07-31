@@ -16,10 +16,14 @@ class NewsSearchTab extends StatefulWidget {
   State<NewsSearchTab> createState() => _NewsSearchTabState();
 }
 
-class _NewsSearchTabState extends State<NewsSearchTab> {
+class _NewsSearchTabState extends State<NewsSearchTab>
+    with AutomaticKeepAliveClientMixin<NewsSearchTab> {
   final controller = NewsSearchController();
   int periodHours = 24;
   int maxResults = 10;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void dispose() {
@@ -55,44 +59,47 @@ class _NewsSearchTabState extends State<NewsSearchTab> {
   }
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (_) => getIt<NewsSearchBloc>(),
-        child: Builder(
-          builder: (context) => CustomScrollView(
-            slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
-                sliver: SliverToBoxAdapter(
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1180),
-                      child: Column(
-                        children: [
-                          SearchFiltersPanel(
-                            controller: controller,
-                            periodHours: periodHours,
-                            maxResults: maxResults,
-                            onPeriodChanged: (value) =>
-                                setState(() => periodHours = value),
-                            onMaxResultsChanged: (value) =>
-                                setState(() => maxResults = value),
-                            onChanged: () => setState(() {}),
-                            onClear: () => _clearSearch(context),
-                            onSearch: () => _search(context),
-                          ),
-                          const SizedBox(height: 28),
-                          NewsResultsView(
-                              onPostStatusChanged: (url) => context
-                                  .read<NewsSearchBloc>()
-                                  .add(NewsPostStatusChanged(url))),
-                        ],
-                      ),
+  Widget build(BuildContext context) {
+    super.build(context);
+    return BlocProvider(
+      create: (_) => getIt<NewsSearchBloc>(),
+      child: Builder(
+        builder: (context) => CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+              sliver: SliverToBoxAdapter(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1180),
+                    child: Column(
+                      children: [
+                        SearchFiltersPanel(
+                          controller: controller,
+                          periodHours: periodHours,
+                          maxResults: maxResults,
+                          onPeriodChanged: (value) =>
+                              setState(() => periodHours = value),
+                          onMaxResultsChanged: (value) =>
+                              setState(() => maxResults = value),
+                          onChanged: () => setState(() {}),
+                          onClear: () => _clearSearch(context),
+                          onSearch: () => _search(context),
+                        ),
+                        const SizedBox(height: 28),
+                        NewsResultsView(
+                            onPostStatusChanged: (url) => context
+                                .read<NewsSearchBloc>()
+                                .add(NewsPostStatusChanged(url))),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }
