@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../news_search/presentation/controllers/news_search_controller.dart';
 import '../../../news_search/presentation/widgets/tag_input_field.dart';
+import '../../../news_search/presentation/widgets/team_suggestions.dart';
 
 class EngagementFiltersPanel extends StatelessWidget {
   const EngagementFiltersPanel({
@@ -42,6 +43,7 @@ class EngagementFiltersPanel extends StatelessWidget {
                 label: 'Times',
                 hint: 'Ex.: Santos',
                 icon: Icons.groups_outlined,
+                suggestions: teamSuggestions,
                 onChanged: onChanged,
               ),
               const SizedBox(height: 12),

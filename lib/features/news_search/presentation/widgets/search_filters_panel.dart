@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../controllers/news_search_controller.dart';
 import 'tag_input_field.dart';
+import 'team_suggestions.dart';
 
 class SearchFiltersPanel extends StatelessWidget {
   const SearchFiltersPanel(
@@ -40,6 +41,7 @@ class SearchFiltersPanel extends StatelessWidget {
                   label: 'Times',
                   hint: 'Ex.: Santos',
                   icon: Icons.groups_outlined,
+                  suggestions: teamSuggestions,
                   onChanged: onChanged),
               const SizedBox(height: 12),
               TagInputField(
