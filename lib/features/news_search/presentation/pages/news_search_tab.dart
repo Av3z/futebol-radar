@@ -35,6 +35,7 @@ class _NewsSearchTabState extends State<NewsSearchTab>
     controller.teams.clear();
     controller.sources.clear();
     controller.keywords.clear();
+    controller.excludedTerms.clear();
     setState(() {});
     blocContext.read<NewsSearchBloc>().add(const NewsSearchCleared());
   }
@@ -52,6 +53,7 @@ class _NewsSearchTabState extends State<NewsSearchTab>
                 ? const ['Google']
                 : List.of(controller.sources),
             keywords: List.of(controller.keywords),
+            excludedTerms: List.of(controller.excludedTerms),
             maxResultsPerTeam: maxResults,
             periodHours: periodHours,
           ),

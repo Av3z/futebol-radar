@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../controllers/news_search_controller.dart';
 import 'tag_input_field.dart';
 import 'team_suggestions.dart';
+import 'exclusion_suggestions.dart';
 
 class SearchFiltersPanel extends StatelessWidget {
   const SearchFiltersPanel(
@@ -67,6 +68,16 @@ class SearchFiltersPanel extends StatelessWidget {
                   label: 'Palavras-chave',
                   hint: 'Futebol é padrão. Ex.: mercado da bola',
                   icon: Icons.sell_outlined,
+                  onChanged: onChanged),
+              const SizedBox(height: 12),
+              TagInputField(
+                  controller: controller,
+                  field: controller.exclusion,
+                  values: controller.excludedTerms,
+                  label: 'Excluir do t\u00edtulo',
+                  hint: 'Ex.: Ao Vivo',
+                  icon: Icons.filter_alt_off_outlined,
+                  suggestions: exclusionSuggestions,
                   onChanged: onChanged),
               const SizedBox(height: 12),
               Row(

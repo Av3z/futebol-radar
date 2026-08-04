@@ -28,6 +28,7 @@ void main() {
       teams: ['Santos'],
       sources: ['Bolavip'],
       keywords: [],
+      excludedTerms: [],
       maxResultsPerTeam: 10,
       periodHours: 24);
 

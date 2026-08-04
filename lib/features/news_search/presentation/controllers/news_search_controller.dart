@@ -5,16 +5,19 @@ class NewsSearchController {
   final profile = TextEditingController();
   final source = TextEditingController();
   final keyword = TextEditingController();
+  final exclusion = TextEditingController();
   final teams = <String>[];
   final profiles = <String>[];
   final sources = <String>[];
   final keywords = <String>[];
+  final excludedTerms = <String>[];
 
   void dispose() {
     team.dispose();
     profile.dispose();
     source.dispose();
     keyword.dispose();
+    exclusion.dispose();
   }
 
   void add(TextEditingController field, List<String> target) {

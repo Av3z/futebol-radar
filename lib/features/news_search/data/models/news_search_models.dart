@@ -11,6 +11,7 @@ class NewsSearchRequestModel {
         'teams': filters.teams,
         'sources': filters.sources,
         'keywords': filters.keywords,
+        'excluded_terms': filters.excludedTerms,
         'max_results_per_team': filters.maxResultsPerTeam,
         'period_hours': filters.periodHours
       };
